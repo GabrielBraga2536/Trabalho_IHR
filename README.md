@@ -42,7 +42,7 @@ O CareBot é um robô móvel autônomo desenvolvido para navegação em ambiente
 
 ![Mapa de empatia](images/empatia.png)
 
-#### Persona - Ana
+#### Persona - Amanda
 - **Vê:** Um ambiente hospitalar movimentado, com corredores longos e pacientes que precisam de atenção constante. Vê colegas sobrecarregados realizando tarefas administrativas e logísticas que poderiam ser delegadas.
 - **Ouve:** Comentários de colegas sobre o medo de que a tecnologia substitua funções humanas. Orientações da chefia sobre eficiência e produtividade.
 - **Diz e faz:** Passa grande parte do turno transportando materiais, medicamentos e amostras entre alas. Comenta com colegas que "falta tempo para cuidar dos pacientes de verdade".
@@ -60,39 +60,38 @@ O CareBot é um robô móvel autônomo desenvolvido para navegação em ambiente
 
 ## Contexto de uso
 
-> 💡
-> - Descreva o ambiente em que o robô interage com os usuários
-> - Qual/quais o(s) contexto(s) sociais, econômicos e culturais existentes neste ambiente?
-> - Quais informações sobre o ambiente o robô deve saber antes de iniciar a tarefa?
 
-<details>
-<summary>📄</summary>
+O CareBot trabalha dentro de um hospital de médio porte com vários andares. A tarefa liga pontos de origem, como postos de enfermagem e alas de internação, a pontos de destino, como laboratório de análises clínicas, farmácia e CME. Para isso, o robô precisa passar por corredores longos e compartilhados por macas, cadeiras de rodas, carrinhos de medicação e de limpeza, pacientes com mobilidade reduzida; e elevadores que são espaços confinados e divididos com pessoas, a porta tem tempo de abertura limitado, a soleira tem vãos e desníveis.
 
-Saguão de entrada e corredores do prédio principal da FEI, durante o FEI Portas Abertas (evento de um único dia, com alta lotação). O ambiente é barulhento e há vários grupos de visitantes circulando ao mesmo tempo, muitos acompanhados de monitores humanos. O robô precisa saber, antes de começar, o mapa dos laboratórios abertos naquele dia e quais estão temporariamente fechados.
-
-</details>
 
 ## Jornada do usuário
 
-> 💡
-> - Criar uma narrativa para o o seu robô e o usuário.
-> - Determine o passo a passo que o usuário realiza desde o primeiro até o último encontro com robô na realização da tarefa.
-> - O que está acontecendo com o ambiente quando o robô está interagindo com o usuário?
->   - Descreva o que acontece ou pode acontecer passo a passo
->   - Como a tarefa começa? Como a tarefa evolui? Como a tarefa termina?
-> - Enfatize todos os momentos em que acontece uma interação verbal, não-verbal e espacial.
 
-<details>
-<summary>📄</summary>
+**1. Solicitação (início da tarefa)**
+- Amanda abre a interface (tela do posto ou tablet), escolhe *"Enviar material"*, define o destino *Laboratório – 1º andar* e a prioridade.
 
-1. Ana e o pai entram no saguão e ficam parados olhando ao redor, sem saber para onde ir.
-2. O Rumo percebe o grupo parado (sinal de "perdido") e se aproxima devagar, pela frente, mantendo distância social *(espacial)*.
-3. O robô pergunta "Posso ajudar vocês a encontrar algum curso ou laboratório?" e mostra um menu de ícones na tela *(verbal)*.
-4. Ana toca em "Engenharia de Robôs"; o robô confirma e começa a andar, olhando de tempos em tempos para trás para checar se o grupo o segue *(espacial + não-verbal)*.
-5. No corredor, o robô encontra duas pessoas conversando e contorna sem passar entre elas *(espacial)*.
-6. Ao chegar no laboratório, o robô se vira de frente para o grupo, inclina levemente a "cabeça" e deseja uma boa visita *(não-verbal)*.
+**2. Deslocamento até a usuária**
+- O robô anda pelo **lado direito** do corredor, em velocidade reduzida. Ele passa por pessoas mantendo pelo menos a **zona pessoal (≥ 0,5–1,2 m)**. Se encontra pessoas conversando, contorna o grupo e **nunca passa entre elas**. Diante de quem anda devagar, reduz a velocidade e espera uma brecha.
 
-</details>
+**3. Aproximação e cumprimento**
+- O robô chega **pela frente** de Amanda, dentro do campo de visão dela, e não por trás. Para a cerca de **1,2 m**, na fronteira entre a zona pessoal e a zona social de Hall, e vira a frente, onde ficam a tela e as prateleiras, na direção dela.
+
+**4. Carregamento e confirmação**
+- Amanda coloca as amostras na prateleira e toca em *"Confirmar envio"*.
+
+**5. Navegação até o elevador**
+- Se o caminho estiver totalmente bloqueado, o robô para, espera alguns segundos e diz: *"Com licença, posso passar?"*. Se continuar bloqueado, recalcula a rota.
+
+**6. Uso do elevador (momento mais delicado)**
+- **Espera:** o robô se posiciona **ao lado da porta, não na frente dela**, para não atrapalhar quem sai. Chama o elevador pela interface dedicada ou pelo acionamento físico do botão, conforme a solução escolhida.
+- **Prioridade:** quando a porta abre, o robô avalia a ocupação com o LiDAR e a câmera. Se houver **maca, cadeira de rodas ou cabine cheia**, ele **cede a vez**: *"Pode ir, eu aguardo o próximo."* O LED fica **âmbar**.
+- **Entrada:** com espaço livre, ele diz *"Com licença"* e entra devagar, atravessando a soleira em linha reta. A tração diferencial com rodas convencionais foi escolhida justamente para vencer esse desnível com estabilidade. Ele fica **junto ao fundo ou à lateral da cabine**, ocupando o menor espaço possível e com a frente virada para a porta.
+- **Dentro da cabine:** o robô fica **parado e em silêncio**. Não gira nem se movimenta perto dos passageiros. A tela mostra *"Indo para o 1º andar"*, para que as pessoas entendam por que ele está ali.
+- **Identificação do andar:** o andar é reconhecido pelo visor (visão computacional) ou pelo sinal da interface. Ao chegar, o robô **troca o mapa** para o do 1º andar.
+- **Saída:** espera os passageiros mais próximos da porta saírem primeiro. Depois diz *"Com licença, este é meu andar"* e sai.
+
+**7. Entrega no laboratório**
+- O técnico retira as amostras e confirma na tela. O robô responde: *"Entrega concluída. Obrigado!"*
 
 ## Análise de concorrência
 
