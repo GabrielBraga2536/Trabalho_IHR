@@ -1,4 +1,4 @@
-
+<div align="justify">
 # **CareBot:** Melhoria de Projeto e Otimização da Cinemática Aplicada ao Projeto OmniCare
 
 Trabalho de Interação Humano-Robô (IHR) apresentado ao Centro Universitário [FEI](https://portal.fei.edu.br/), como parte dos requisitos necessários para aprovação na disciplina de Interação Humano-Robô (IHR) (CCR230) do curso de Engenharia de Robôs, orientado pelo Prof. Dr. [Fagner de Assis Moura Pimentel](https://github.com/fagnerpimentel).
@@ -31,7 +31,7 @@ O CareBot é um robô móvel autônomo desenvolvido para navegação em ambiente
 
 - **Primários** — Equipe de enfermagem e técnicos hospitalares, principais beneficiados pela redução de tarefas logísticas repetitivas.
 - **Secundários** — Gestores hospitalares, interessados na redução de custos operacionais e aumento de eficiência; Médicos e profissionais da saúde, beneficiados pela maior disponibilidade da equipe de enfermagem; Pacientes, que teram seus exames ou medicamentos transportados pelo robô.
-- **Terciários** — Financiadores e instituições de fomento, interessados no impacto e viabilidade do projeto; Staff interno do hospital, como faxineiros, manutentores e todos os envolvidos no ambiente de  operação do robô.
+- **Anti-Usuários** — Financiadores e instituições de fomento, interessados no impacto e viabilidade do projeto; Staff interno do hospital, como faxineiros, manutentores e todos os envolvidos no ambiente de  operação do robô.
 
 ### Personas
 
@@ -95,24 +95,55 @@ O CareBot trabalha dentro de um hospital de médio porte com vários andares. A 
 
 ## Análise de concorrência
 
-> 💡
-> - Pesquise robôs existentes atualmente que possam fazer a tarefa deste projeto.
-> - Selecione pelo menos 3 robôs diferentes que podem fazer essa tarefa.
-> - Em relação aos concorrentes, respondam as seguintes perguntas:
->   - Existe plataforma similar que atende o mesmo mercado e funcionalidades? Se sim: Quais os pontos positivos? Quais os pontos negativos?
->   - Existe plataforma diferente quanto ao serviço, mas que atenda esse mercado? Se sim: Quais os pontos positivos? Quais os pontos negativos?
->   - Quais plataformas sua equipe acha mais interessantes? Qual a justificativa?
+- **Aethon Zena RX (ST Engineering Aethon, EUA):** Sucessor do TUG T2 para farmácias e laboratórios, tem navegação com desvio de obstáculos e localização 8 vezes mais rápidas, mais de 10.000 polegadas cúbicas de capacidade (2,6 vezes a do T2), interface por toque que exige quase nenhum treinamento e 10 horas de operação contínua. O gabinete tem quatro compartimentos com trava independente, acessados por biometria ou PIN.
 
-<details>
-<summary>📄</summary>
+<p align="center">
+  <img src="images/ZENA_RX.png" alt="ZENA_RX" width="370">
+</p>
 
-- **Totens interativos de informação** (comuns em aeroportos e shoppings) — bons para consultar informação estática, mas não guiam fisicamente o visitante até o destino.
-- **Aplicativo de mapa indoor do campus** — dispensa hardware físico, mas perde o acolhimento social que um robô oferece a um visitante inseguro.
-- **Pepper (SoftBank Robotics)**, usado em recepções comerciais — proposta muito parecida (recepcionar e guiar), mas é caro e não é sob medida para o layout da FEI.
+- **Pudu FlashBot (Pudu Robotics, China):** Pesa 55 kg, carrega 30 kg (15 kg por bandeja) e tem velocidade ajustável entre 0,5 e 1,5 m/s. Mede cerca de 54 × 53 × 105 cm e tem autonomia de 8 a 12 horas, com recarga automática. 
 
-A equipe considera o Pepper a referência mais próxima, mas acredita que um robô mais simples e barato (sem braços articulados) atende igualmente bem ao caso de uso do FEI Portas Abertas.
+<p align="center">
+  <img src="images/Flash_bot.png" alt="Flash Bot" width="300">
+</p>
 
-</details>
+- **Relay (Relay Robotics, antiga Savioke):**, A versão Relay tem um compartimento único e trancável, indicado para entrega de medicamentos e amostras que exigem transporte seguro em hospitais. O software permite rastrear a cadeia de custódia e exigir senha para abrir o compartimento.
+
+<p align="center">
+  <img src="images/relay_robot.jpg" alt="Relay_Robot" width="600">
+</p>
+
+**1. Existe plataforma similiar, que atende o mesmo mercado e funcionalidades?**
+O Zena RX Foi desenhado especificamente para o hospital, com foco em farmácia e laboratório.
+
+- *Pontos positivos:*
+  - A segurança é a mais completa dos robôs analisados. O gabinete é todo de metal, com portas travadas fisicamente, biometria e senhas individuais da equipe. 
+  - Faz até 4 entregas seguras por viagem. Isso reduz o número de viagens. 
+  - Integra-se com elevadores de todas as marcas e com sistemas de portas         automáticas. 
+  - A capacidade é de cerca de 164 L, o que permite levar desde frascos pequenos até caixas grandes na mesma viagem, e há exigência de dupla autenticação na cadeia de custódia. 
+  - No laboratório, a proposta é evitar o sistema de tubos pneumáticos. 
+
+- *Pontos negativos:*
+  - O site não divulga preço e direciona para agendar uma conversa comercial. 
+  - É especializado em farmácia e laboratório. Para transportar carrinhos inteiros, a Aethon oferece outro modelo, o T3. O cliente teria de combinar robôs diferentes. 
+  - É um produto fechado e importado. Isso implica custo alto, dependência do fabricante para suporte e pouca possibilidade de adaptação ao contexto brasileiro.
+
+**2. Existe plataforma diferente quanto ao serviço, mas que atenda esse mercado?**
+O FlashBot nasceu como robô de entrega de prédios (hotéis e escritórios), mas também é oferecido para hospitais.
+
+- *Pontos positivos:*
+  - É anunciado para transportar medicamentos, refeições, roupa de cama e suprimentos entre andares. 
+  - Usa IoT em nuvem para chamar elevadores automaticamente, e vários robôs podem cooperar entre si. 
+  - Os compartimentos são ajustáveis (de dois a quatro) e têm acesso seguro. 
+  - Tem escala de produção grande: quase 80 mil unidades enviadas para mais de 60 países. 
+  - A versão atualizada também opera em áreas semiexternas, como jardins de hospitais. 
+  - O custo tende a ser menor: um revendedor lista o robô a US$ 20.000, com a observação de que preços na América Latina podem variar. 
+
+- *Pontos negativos:*
+  - É um robô generalista.Não dispôe recursos hospitalares como biometria ou rastreio de cadeia de custódia, que o Zena RX e o Relay oferecem.
+  - A carga de 30 kg e os compartimentos de bandeja atendem melhor a suprimentos leves do que a materiais clínicos sensíveis.
+  - Não contém informações suficiente sobre conformidade com normas sanitárias, o que seria necessário verificar antes de uma aplicação hospitalar real.
+
 
 ## Design do Robô
 
@@ -158,18 +189,9 @@ O Rumo fica próximo do polo **minimalista** do espectro, com leve antropomorfis
 
 ### Valores e ética
 
-> 💡
-> - Aplicando o **Value-Sensitive Design (VSD)** — a tecnologia deve se adaptar às necessidades humanas, não o contrário — identifique **1 a 2 valores** em jogo no seu projeto (privacidade, autonomia, segurança, inclusão, etc.).
-> - Identifique **1 risco ético** do seu robô e como o grupo pretende mitigá-lo.
+Dois valores importantes para o CareBot são segurança e privacidade. A segurança deve orientar o planejamento das rotas e o comportamento do robô diante de obstáculos e pessoas. Já a privacidade deve ser preservada, evitando a coleta ou o armazenamento desnecessário de informações pessoais dos pacientes e profissionais.
 
-<details>
-<summary>📄</summary>
-
-**Valores:** acessibilidade (o robô deve ajustar a velocidade para visitantes com mobilidade reduzida) e privacidade (não deve gravar ou reconhecer rostos sem consentimento).
-
-**Risco ético:** o robô poderia, sem querer, direcionar mais visitantes para cursos "badalados", reduzindo a visibilidade de cursos menos procurados. **Mitigação:** o menu de destinos sempre mostra todos os cursos na mesma ordem e tamanho, sem personalização por popularidade.
-
-</details>
+Um risco ético é que o robô provoque acidentes ou bloqueie a passagem em áreas de grande circulação, principalmente quando houver pacientes com mobilidade reduzida. Para reduzir esse risco, o CareBot deve operar com velocidade controlada, manter distância adequada das pessoas e priorizar a parada quando não houver condições seguras para continuar.
 
 ### Protótipo no papel
 
@@ -305,3 +327,5 @@ O Rumo fica próximo do polo **minimalista** do espectro, com leve antropomorfis
 
 ---                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 [^1]: Fonte: Adaptado de <https://hazeshift.com.br/mapa-de-empatia/>
+
+</div>
