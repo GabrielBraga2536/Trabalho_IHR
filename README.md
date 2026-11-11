@@ -336,101 +336,116 @@ Para cumprir sua rotina de entregas entre os andares do hospital, o CareBot real
 
 ## Interações do robô
 
+A comunicação do CareBot com as pessoas acontece por três canais complementares: o espacial, o verbal e o não-verbal. Como discutido anteriormente, o robô ocupa a posição 1 na escala de antropomorfismo e não possui cabeça, olhos ou braços; por isso, sua comunicação depende, principalmente, da forma como se movimenta, da tela, das luzes de LED e de um conjunto restrito de falas. Os três canais foram pensados para funcionar juntos, já que um sinal isolado pode ser ignorado em um corredor hospitalar movimentado.
+
 ### Espacial
 
-> 💡
-> - Descreva **onde** o robô se posiciona em relação ao usuário (distância e orientação do corpo), usando as **zonas de proxêmica** (Hall) e as **F-formations**.
-> - Como o robô **inicia** a interação (direção de aproximação) e como **sinaliza** para onde vai?
-> - Para cada interação espacial:
->   - Descreva a interação.
->   - Determine os pré-requisitos para que a interação aconteça.
->   - Determine a resposta emocional esperada do usuário quando a interação é finalizada.
-> - O que o robô faz ao encontrar pessoas **paradas, em conversa ou em grupo**, e ao passar por elas num corredor (sem cruzar entre pessoas conversando)?
-> - Proponha **um ajuste** desse comportamento espacial para um contexto de uso diferente do principal.
+Para definir a posição do robô em relação ao usuário, utiliza-se como base o modelo de proxêmica de Hall, que divide o espaço ao redor de uma pessoa em zonas íntima, pessoal, social e pública. Durante o deslocamento, o CareBot mantém-se, no mínimo, na zona pessoal (entre 0,5 m e 1,2 m) ao passar por alguém. Já nas interações de coleta e entrega, para a cerca de 1,2 m, na fronteira entre a zona pessoal e a zona social, distância que permite à pessoa alcançar as prateleiras e a tela sem que o robô invada seu espaço.
 
-<details>
-<summary>📄</summary>
+Além disso, utiliza-se o conceito de F-formation para orientar o corpo do robô. Na coleta e na entrega, robô e profissional formam uma configuração face a face (*vis-à-vis*), com a frente do robô, onde ficam a tela e as prateleiras, voltada para a pessoa. Dessa forma, o espaço compartilhado entre os dois (*o-space*) coincide, nesse caso, com a própria área de carga. Quando encontra pessoas conversando, o robô reconhece o *o-space* formado pelo grupo e o trata como uma área a ser contornada, e nunca atravessada.
 
-- **Posicionamento:** aborda o grupo a uma distância social (2–3 m), sempre pela frente, nunca por trás.
-- **Início da aproximação:** aproxima-se em diagonal (nunca em linha reta "contra" a pessoa), reduzindo a velocidade a 1,5 m de distância.
-- **Sinalização de destino:** gira a "cabeça" na direção do laboratório antes de começar a andar.
-- **Grupos e corredores:** ao encontrar duas pessoas conversando, contorna por trás delas, sem passar entre as duas; para grupos maiores, aguarda uma abertura natural na formação.
-- **Ajuste de contexto:** em dias normais de aula (sem evento), o robô aumenta a distância de abordagem, já que há menos ruído social e mais espaço livre no saguão.
+A interação é sempre iniciada pela frente, dentro do campo de visão da pessoa, e nunca por trás, já que uma aproximação inesperada causa susto e desconfiança. O robô reduz a velocidade gradualmente à medida que se aproxima e, antes de partir, gira a frente na direção em que vai seguir, enquanto a tela exibe o destino. Assim, quem está por perto consegue antecipar a trajetória do robô antes mesmo de ele se mover.
 
-</details>
+#### 1. Aproximação para coleta e entrega
+
+- **Descrição:** o robô chega pela frente do profissional, desacelera aos poucos, para a cerca de 1,2 m e gira o corpo para que a tela e as prateleiras fiquem voltadas para a pessoa.
+- **Pré-requisitos:**
+  - Profissional localizado pelo LiDAR e pela câmera no ponto de origem ou de destino.
+  - Espaço livre à frente da pessoa para que o robô se posicione sem bloquear a passagem.
+  - Tarefa de coleta ou de entrega ativa no sistema.
+- **Resposta emocional esperada:** tranquilidade e sensação de controle, uma vez que a pessoa vê o robô chegando, sabe o que ele espera dela e não precisa se deslocar para alcançá-lo.
+
+#### 2. Passagem por pessoas no corredor
+
+- **Descrição:** o robô anda pelo lado direito do corredor, em velocidade reduzida, mantendo a zona pessoal das pessoas que cruza. Diante de alguém parado, desvia mantendo essa distância; diante de quem anda devagar, reduz a velocidade e aguarda uma brecha para ultrapassar; diante de pessoas conversando, contorna o grupo por fora, sem passar entre elas. Para grupos maiores, que ocupam toda a largura do corredor, o robô para e aguarda uma abertura natural na formação.
+- **Pré-requisitos:**
+  - Mapa do andar carregado e localização do robô estabelecida.
+  - Pessoas detectadas pelo LiDAR, com estimativa de posição e direção de deslocamento.
+  - Largura de corredor suficiente para o desvio; caso contrário, aplica-se a parada de segurança descrita nas ações do robô.
+- **Resposta emocional esperada:** indiferença confortável, isto é, as pessoas percebem o robô, mas não precisam interromper o que fazem nem mudar seu trajeto por causa dele.
+
+#### 3. Posicionamento no elevador
+
+- **Descrição:** o robô espera ao lado da porta, e não na frente dela, liberando a saída de quem está na cabine. Ao entrar, ocupa o fundo ou a lateral, com a frente voltada para a porta, e permanece parado até chegar ao andar de destino.
+- **Pré-requisitos:**
+  - Rota que exija troca de andar.
+  - Porta totalmente aberta e espaço interno livre, sem macas ou cadeiras de rodas.
+- **Resposta emocional esperada:** segurança e previsibilidade, já que, em um espaço confinado, o robô ocupa pouco espaço e não se movimenta perto dos passageiros.
+
+#### Ajuste para outro contexto de uso
+
+O comportamento descrito acima considera corredores de alas de internação. Em um pronto-socorro, entretanto, o fluxo de macas de emergência é intenso e imprevisível, fazendo com que um desvio lento se torne um obstáculo para o atendimento. Por isso, nesse contexto, o robô deve aumentar a distância mantida em relação a macas e equipes em deslocamento, preferir trajetos junto à parede e, ao detectar uma maca se aproximando, encostar-se lateralmente e parar até que ela passe, em vez de tentar contorná-la.
+
 
 ### Verbal
 
-> 💡
-> - A interação verbal do robô será **restrita** (comandos, FSM) ou **aberta** (LLM/chatbot)? Justifique a escolha.
-> - Para cada interação verbal:
->   - Descreva a interação.
->   - Determine os pré-requisitos para que a interação aconteça.
->   - Determine a resposta emocional esperada do usuário quando a interação é finalizada.
-> - Como o robô lida com o **timing** das respostas (silêncio, marcadores conversacionais como "uh-huh")?
-> - Que tipo de voz (TTS) o robô usa, e por que ela **combina** com a aparência e o propósito dele?
-> - Identifique **uma limitação** do reconhecimento de fala (ruído, sotaque, vocabulário) que afetaria o seu cenário de uso, e como mitigá-la.
+A interação verbal do CareBot é restrita a um conjunto fechado de falas associadas a cada situação. Essa escolha se justifica por três motivos. Primeiramente, as falas necessárias são poucas e previsíveis (pedir passagem, ceder a vez), o que não exige uma conversa aberta. Em seguida, como estabelecido na seção de valores e ética, a privacidade deve ser preservada, e um modelo de linguagem aberto tenderia a coletar e processar falas de pacientes e profissionais sem necessidade. Por fim, um robô que conversa livremente sugere capacidades sociais que o CareBot não possui, contrariando a ideia de prometer menos e entregar mais adotada no design.
 
-<details>
-<summary>📄</summary>
+#### 1. Pedido de passagem
 
-**Restrita** — usa uma árvore de diálogo (FSM) com um conjunto fechado de destinos e perguntas frequentes, pois o saguão é ruidoso e o vocabulário esperado é previsível; mais confiável do que abrir para um LLM.
+- **Descrição:** ao encontrar o caminho bloqueado, o robô para, aguarda alguns segundos em silêncio e, se o bloqueio continuar, diz: *"Com licença, posso passar?"*. Se ainda assim não houver passagem, recalcula a rota sem insistir no pedido.
+- **Pré-requisitos:**
+  - Obstáculo ou pessoa detectado a menos de 0,5 m da frente do robô.
+  - Tempo de espera inicial esgotado sem que o caminho tenha sido liberado.
+- **Resposta emocional esperada:** cordialidade e disposição em colaborar, já que o pedido é educado, curto e só acontece depois de o robô ter esperado.
 
-**Timing:** ao processar um pedido, o robô emite um "hum" sonoro curto e pisca os olhos em sequência, evitando silêncio constrangedor.
+#### 2. Comunicação no elevador
 
-**Voz:** TTS de tom jovem e neutro, volume ajustável ao ruído do saguão — combina com o porte pequeno do robô (uma voz grave soaria estranha).
+- **Descrição:** ao ceder a vez, o robô diz *"Pode ir, eu aguardo o próximo."*; ao entrar, *"Com licença"*; e, ao sair, *"Com licença, este é meu andar"*. Dentro da cabine, permanece em silêncio, enquanto a tela informa o andar de destino.
+- **Pré-requisitos:**
+  - Elevador com a porta aberta e ocupação avaliada pelo LiDAR e pela câmera.
+  - Andar de destino reconhecido pelo visor ou pela interface integrada.
+- **Resposta emocional esperada:** compreensão e conforto, uma vez que os passageiros entendem por que o robô está ali e o que ele vai fazer, sem se sentirem pressionados a dar espaço.
 
-**Limitação do ASR:** o ruído do evento atrapalha o reconhecimento de nomes de professores e disciplinas. **Mitigação:** escolhas críticas (curso, laboratório) são feitas por toque na tela; o reconhecimento de fala só é usado para perguntas simples de sim/não.
+#### Timing
 
-</details>
+O robô não usa marcadores conversacionais vocais, como "uh-huh", já que eles sugeririam uma capacidade de diálogo que ele não possui. Em seu lugar, ao receber um toque na tela, emite um sinal sonoro curto e altera a cor do LED, confirmando, imediatamente, que a ação foi registrada e evitando um silêncio ambíguo. Além disso, o robô não fala enquanto detecta alguém falando por perto, aguardando uma pausa antes de pedir licença, e nunca repete o mesmo pedido em sequência, o que soaria insistente.
 
 ### Não-verbal
 
-> 💡
-> - Escolha **dois canais** não verbais (olhar, gesto, toque, postura, ritmo, imitação) e descreva como o robô os usaria.
-> - Para cada interação não-verbal:
->   - Descreva a interação.
->   - Determine os pré-requisitos para que a interação aconteça.
->   - Determine a resposta emocional esperada do usuário quando a interação é finalizada.
-> - Explique como o robô **perceberia** as pistas não verbais correspondentes da pessoa.
-> - Descreva um caso em que a **falta de coordenação** entre fala e comportamento não verbal quebraria a interação.
-> - Proponha **uma pista não verbal exclusiva** do robô (sem equivalente humano direto) que ajudaria na comunicação.
+Como dito anteriormente, o CareBot não possui rosto nem braços, o que descarta canais como o olhar e o gesto. Por isso, os dois canais não verbais escolhidos são a **postura**, entendida aqui como a orientação do corpo do robô, e o **ritmo**, isto é, a velocidade e a suavidade de seus movimentos.
 
-<details>
-<summary>📄</summary>
+#### 1. Orientação do corpo (postura)
 
-**Canais escolhidos: olhar e postura.**
-- **Olhar:** os "olhos" de LED giram na direção de quem está falando com o robô e na direção da rota a seguir.
-- **Postura:** o corpo se inclina levemente para frente ao iniciar a aproximação (convite) e se afasta/gira de lado ao encerrar a interação (despedida).
+- **Descrição:** a frente do robô, onde ficam a tela e as prateleiras, funciona como sua "face". Ao chegar a um profissional, o robô gira essa frente na direção da pessoa, sinalizando que a interação começou; ao terminar, gira na direção da próxima rota, sinalizando que vai partir. No elevador, a frente voltada para a porta indica que o robô aguarda o seu andar.
+- **Pré-requisitos:**
+  - Posição da pessoa ou da porta identificada pelo LiDAR e pela câmera.
+  - Espaço livre ao redor do robô para que ele gire sem encostar em ninguém.
+- **Resposta emocional esperada:** clareza e atenção, já que a pessoa entende, sem precisar de uma fala, quando o robô está disponível para ela e quando está de saída.
 
-**Percepção:** uma câmera de profundidade detecta se a pessoa está olhando para o robô (atenção) e se está parada olhando ao redor (sinal de estar perdida).
+#### 2. Velocidade e suavidade do movimento (ritmo)
 
-**Falta de coordenação:** se o robô disser "vamos ao laboratório de robótica" mas girar para o lado errado, o grupo hesita e para de segui-lo — a confiança se quebra.
+- **Descrição:** o robô desacelera de forma gradual ao se aproximar de alguém, acompanha o passo de quem anda devagar à sua frente e para de maneira suave, sem frenagens bruscas. Um movimento lento e contínuo comunica cuidado; uma parada completa comunica que o robô está cedendo passagem.
+- **Pré-requisitos:**
+  - Pessoas detectadas pelo LiDAR, com estimativa de distância e de velocidade de deslocamento.
+  - Controle de velocidade com rampas de aceleração e desaceleração configuradas no Nav2.
+- **Resposta emocional esperada:** confiança e ausência de susto, uma vez que o comportamento do robô é previsível e coerente com o de alguém que respeita o espaço dos outros.
 
-**Pista exclusiva do robô:** um anel de luz na base pisca em verde quando o robô está confiante do caminho e em amarelo quando está recalculando a rota — sem equivalente humano direto, mas comunica incerteza de forma clara.
-
-</details>
 
 ## Emoção
 
-> 💡
-> - Escolha um **modelo de emoção** (categorias básicas de Ekman, modelo OCC ou modelo dimensional — Russell ou PAD) e justifique a escolha para o seu caso de uso.
-> - Descreva **como** o robô perceberia o estado emocional do usuário, e por quais canais (rosto, voz, postura, outro).
-> - Defina **quando** o robô deve mimetizar a emoção da pessoa e **quando não deve** (lembre-se da exceção da raiva — retribuir raiva raramente ajuda a resolver o conflito).
-> - Identifique um risco de **gerenciamento de expectativas**: se o robô parece emocionalmente responsivo, que outras capacidades sociais o usuário passa a esperar dele? O robô consegue cumprir essa expectativa?
+A expressão de emoções em um robô de logística hospitalar exige cuidado. Como discutido anteriormente, o CareBot não participa do cuidado direto dos pacientes e deve manter coerência entre aparência e comportamento; entretanto, ele circula diariamente entre pessoas que podem estar cansadas, apressadas, preocupadas ou fragilizadas. Por isso, o objetivo não é que o robô "sinta" ou demonstre emoções intensas, mas que reconheça, de forma simples, o estado de quem está por perto e ajuste seu comportamento para não agravar uma situação já delicada.
 
-<details>
-<summary>📄</summary>
+### Percepção do estado emocional do usuário
 
-**Modelo:** categorias básicas de Ekman (feliz, surpreso, neutro) — simples o suficiente para expressar por luzes e tom de voz, sem exigir um rosto detalhado.
+Utilizando-se dos sensores que o robô já possui, é possível estimar, principalmente, a dimensão de ativação a partir de pistas comportamentais simples:
 
-**Percepção:** o robô reconhece tom de voz alterado (frustração) pelo microfone e expressões faciais básicas pela câmera, para saber se o visitante está confuso ou satisfeito.
+- **Movimento (LiDAR):** a velocidade e a direção de deslocamento de uma pessoa indicam pressa ou urgência, como no caso de uma equipe que corre em direção a um quarto ou de alguém que conduz uma maca rapidamente.
+- **Voz (microfone):** o volume e a intensidade da fala, e não o seu conteúdo, indicam um ambiente tenso ou uma pessoa alterada, sem que seja necessário gravar ou transcrever o que foi dito.
+- **Interação com a tela:** toques repetidos, cancelamentos seguidos ou longos períodos sem resposta sugerem, respectivamente, impaciência ou dúvida diante da interface.
+- **Postura e orientação (câmera):** a câmera permite identificar se a pessoa está voltada para o robô ou de costas e ocupada, sem a necessidade de classificar expressões faciais.
 
-**Mimetismo:** mimetiza entusiasmo — se o visitante se anima ao ver o laboratório de robótica, o robô "sorri" com as luzes — mas **nunca** mimetiza a impaciência de um visitante apressado; nesse caso mantém tom calmo e oferece um caminho mais curto.
+Em coerência com o valor de privacidade estabelecido anteriormente, essas pistas devem ser processadas localmente e descartadas logo após o uso, sem armazenamento de imagens ou de áudio.
 
-**Risco de expectativa:** se o robô demonstra "empolgação", visitantes podem esperar que ele converse sobre assuntos abertos (ex.: "e as notas de corte?"). O robô precisa deixar claro, de forma simpática, quando um assunto está fora do seu escopo.
+### Expressão do robô
 
-</details>
+Tomando como base o projeto OmniCare, do qual o CareBot deriva, a expressão do robô é construída sobre três recursos. Primeiramente, a sinalização luminosa por LEDs endereçáveis, com transições suaves de cor e brilho, cuja intensidade é ajustada para garantir visibilidade sem causar desconforto a pessoas com hipersensibilidade sensorial. Em seguida, um sinal sonoro curto, que funciona como redundância para pessoas com deficiência visual. Por fim, a tela frontal, que, no OmniCare, exibe uma face simples projetada para transmitir neutralidade, serenidade e segurança, reduzindo a apreensão diante de um robô móvel.
+
+### Gerenciamento de expectativas
+
+Um risco importante surge justamente da tela com face e das respostas cordiais. Se o robô parece reagir ao estado emocional das pessoas, pacientes e acompanhantes podem passar a esperar que ele também compreenda suas necessidades, responda a perguntas sobre exames ou medicamentos, reconheça quem são ou ofereça algum tipo de conforto. O CareBot não consegue cumprir essas expectativas, uma vez que sua interação verbal é restrita e sua função se limita ao transporte de materiais.
+
+Vale notar que, no próprio OmniCare, a face exibida na tela foi tratada como um elemento estético e acolhedor, e não como uma interface de interação, já que não envolve troca de informações nem reconhecimento do usuário. Para o CareBot, adota-se a mesma postura: a face deve permanecer neutra e minimalista, mantendo o robô longe do vale da estranheza, e, quando alguém fizer um pedido fora do seu escopo, a tela deve informar, de forma simpática e direta, que o robô não pode ajudar com aquele assunto e que a pessoa deve procurar a equipe de enfermagem. Dessa forma, o robô é percebido como uma máquina educada e confiável, e não como um assistente capaz de oferecer cuidado.
 
 ---                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 [^1]: Fonte: Adaptado de <https://hazeshift.com.br/mapa-de-empatia/>
