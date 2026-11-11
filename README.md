@@ -1,4 +1,5 @@
 <div align="justify">
+
 # **CareBot:** Melhoria de Projeto e Otimização da Cinemática Aplicada ao Projeto OmniCare
 
 Trabalho de Interação Humano-Robô (IHR) apresentado ao Centro Universitário [FEI](https://portal.fei.edu.br/), como parte dos requisitos necessários para aprovação na disciplina de Interação Humano-Robô (IHR) (CCR230) do curso de Engenharia de Robôs, orientado pelo Prof. Dr. [Fagner de Assis Moura Pimentel](https://github.com/fagnerpimentel).
@@ -27,20 +28,22 @@ O CareBot é um robô móvel autônomo desenvolvido para navegação em ambiente
 
 ## Público-Alvo e Stakeholders
 
-### Stakeholders
+#### Stakeholders
 
 - **Primários** — Equipe de enfermagem e técnicos hospitalares, principais beneficiados pela redução de tarefas logísticas repetitivas.
 - **Secundários** — Gestores hospitalares, interessados na redução de custos operacionais e aumento de eficiência; Médicos e profissionais da saúde, beneficiados pela maior disponibilidade da equipe de enfermagem; Pacientes, que teram seus exames ou medicamentos transportados pelo robô.
 - **Anti-Usuários** — Financiadores e instituições de fomento, interessados no impacto e viabilidade do projeto; Staff interno do hospital, como faxineiros, manutentores e todos os envolvidos no ambiente de  operação do robô.
 
-### Personas
+#### Personas
 
 - **Persona primária — Amanda, 34 anos:** técnica de enfermagem, trabalha em um hospital de médio porte e passa grande parte do turno transportando materiais entre alas, o que a afasta dos pacientes. Tem pouca familiaridade com tecnologia avançada e precisa de uma solução simples de operar, sem treinamentos longos. Seu principal interesse no CareBot é ganhar tempo para se dedicar ao cuidado direto dos pacientes.
 - **Persona secundária — Dr. Roberto, 52 anos:** diretor administrativo do hospital e busca constantemente formas de reduzir custos operacionais e melhorar a eficiência dos processos. Não interage diretamente com o robô, mas é o tomador de decisão sobre sua adoção. Seu interesse está nos indicadores de desempenho, retorno sobre investimento e conformidade com normas sanitárias.
 
 ### Mapa de empatia
 
-![Mapa de empatia](images/empatia.png)
+<p align="center">
+  <img src="images/empatia.png" alt="mapa_empatia" width="600">
+</p>
 
 #### Persona - Amanda
 - **Vê:** Um ambiente hospitalar movimentado, com corredores longos e pacientes que precisam de atenção constante. Vê colegas sobrecarregados realizando tarefas administrativas e logísticas que poderiam ser delegadas.
@@ -58,8 +61,8 @@ O CareBot é um robô móvel autônomo desenvolvido para navegação em ambiente
 - **Dores:** Dificuldade em justificar o investimento inicial no robô para a diretoria, receio de problemas técnicos que possam interromper o fluxo hospitalar e incerteza sobre o tempo necessário para o retorno do investimento.
 - **Ganhos:** Redução de custos operacionais com otimização da logística interna, melhora nos indicadores de satisfação de pacientes e funcionários, e posicionamento do hospital como referência em inovação tecnológica.
 
-## Contexto de uso
 
+## Contexto de uso
 
 O CareBot trabalha dentro de um hospital de médio porte com vários andares. A tarefa liga pontos de origem, como postos de enfermagem e alas de internação, a pontos de destino, como laboratório de análises clínicas, farmácia e CME. Para isso, o robô precisa passar por corredores longos e compartilhados por macas, cadeiras de rodas, carrinhos de medicação e de limpeza, pacientes com mobilidade reduzida; e elevadores que são espaços confinados e divididos com pessoas, a porta tem tempo de abertura limitado, a soleira tem vãos e desníveis.
 
@@ -113,7 +116,7 @@ O CareBot trabalha dentro de um hospital de médio porte com vários andares. A 
   <img src="images/relay_robot.jpg" alt="Relay_Robot" width="600">
 </p>
 
-**1. Existe plataforma similiar, que atende o mesmo mercado e funcionalidades?**
+#### 1. Existe plataforma similiar, que atende o mesmo mercado e funcionalidades?
 O Zena RX Foi desenhado especificamente para o hospital, com foco em farmácia e laboratório.
 
 - *Pontos positivos:*
@@ -128,7 +131,7 @@ O Zena RX Foi desenhado especificamente para o hospital, com foco em farmácia e
   - É especializado em farmácia e laboratório. Para transportar carrinhos inteiros, a Aethon oferece outro modelo, o T3. O cliente teria de combinar robôs diferentes. 
   - É um produto fechado e importado. Isso implica custo alto, dependência do fabricante para suporte e pouca possibilidade de adaptação ao contexto brasileiro.
 
-**2. Existe plataforma diferente quanto ao serviço, mas que atenda esse mercado?**
+#### 2. Existe plataforma diferente quanto ao serviço, mas que atenda esse mercado?
 O FlashBot nasceu como robô de entrega de prédios (hotéis e escritórios), mas também é oferecido para hospitais.
 
 - *Pontos positivos:*
@@ -145,35 +148,59 @@ O FlashBot nasceu como robô de entrega de prédios (hotéis e escritórios), ma
   - Não contém informações suficiente sobre conformidade com normas sanitárias, o que seria necessário verificar antes de uma aplicação hospitalar real.
 
 
+#### 3. Quais plataformas nossa equipe acha mais interessantes?
+
+Pudu FlashBot é a mais interessante como referência de produto para o CareBot. Está na mesma faixa de porte (base de cerca de 54 × 53 cm, próxima aos 52 × 40 cm do CareBot) e de custo, e mostra que dá para atender hospitais com um robô compacto e acessível, sem a complexidade de um robô exclusivamente clínico. Ela também reforça a escolha da tração diferencial e do Nav2 para corredores estreitos.
+
+Aethon Zena RX é a mais interessante como meta de funcionalidade futura. O que ela tem de mais valioso para o CareBot é o acesso autenticado aos compartimentos, que responde à preocupação com segurança e rastreabilidade da persona Dr. Roberto.
+
+Posicionamento do CareBot: o FlashBot é generalista e acessível, e o Zena RX é especializado e premium. Fica um espaço para um robô aberto (ROS2 + Nav2), de baixo custo, com recursos mínimos de segurança hospitalar, voltado a hospitais que não têm orçamento para plataformas como o Zena RX.
+
 ## Design do Robô
 
-### Forma, função e affordances
+#### Forma, função e affordances
 
-> 💡
-> - Pense nas características de affordances do seu robô. Que tipo de acessibilidades devem ser consideradas dentro do seu projeto?
-> - A aparência e o comportamento do robô **casam com a função**? Que affordances a forma sinaliza (olhos → enxergar, braços → pegar objetos, tela → interagir por toque)?
-> - Discuta o papel das expectativas do usuário no projeto de um robô. Onde faz sentido "**prometer menos e entregar mais**" (underpromise, overdeliver)?
+- **Acessibilidade física**
 
-<details>
-<summary>📄</summary>
+  - *Altura de carga:* com cerca de 57 cm, o robô obriga uma pessoa em pé a se abaixar para colocar ou retirar itens. Isso vai contra o que a persona Ana busca (menos cansaço físico). A chapa superior mais alta, ou uma bandeja elevada, resolveria. Uma pessoa em cadeira de rodas, por outro lado, alcança bem esse nível.
+  - *Altura de detecção:* o LiDAR fica a cerca de 22 cm do chão. Ele vê pernas e paredes, mas não vê obstáculos suspensos (mesas, macas, suportes de soro). Isso é uma limitação de segurança para pessoas com mobilidade reduzida.
+  - *Porte:* a base de 52 × 40 cm cabe bem em corredores e deixa espaço para passagem de macas e cadeiras de rodas.
+  - *Higienização:* perfis estruturais de alumínio costumam ter ranhuras, e chapas abertas acumulam sujeira. Em hospital, isso dificulta a limpeza.
+<br>
 
-O Rumo tem uma tela no "peito" (affordance de toque), uma "cabeça" com dois pontos luminosos (olhos) que sinalizam para onde está olhando, e **não** tem braços — o que sinaliza corretamente que ele não manipula objetos, apenas informa e guia. Para "prometer menos, entregar mais", o robô nunca é chamado de "assistente inteligente" nos materiais do evento, apenas de "guia do FEI Portas Abertas", evitando a expectativa de uma conversa livre e aberta.
+- **Acessibilidade sensorial e cognitiva**
 
-</details>
+  - Pessoas com deficiência visual ou auditiva precisam de sinais redundantes de presença e intenção, como luz e som juntos.
+  - Hoje o operador dá o destino pelo RViz, que é uma ferramenta técnica. Para a Ana, o ideal é uma interface com poucos botões ou toque, quase sem treinamento.
+  - O robô só opera em um andar. Elevadores e portas ainda não estão integrados, o que limita a autonomia real em hospitais com vários andares.
 
-### Grau de antropomorfismo
+#### Grau de antropomorfismo
 
-> 💡
-> - O seu robô tem um padrão com mais ou menos características antropomórficas (androide, humanoide, zoomórfico, minimalista, robject)? Marquem um ponto no espectro máquina ↔ humano e justifiquem.
-> - Qual padrão é mais aceito pela sociedade dentro do projeto que você está desenvolvendo?
-> - Como o grupo pretende evitar o **vale da estranheza** (uncanny valley), caso o robô tenha um design muito próximo do humano?
+##### 1. Posição no espectro máquina ↔ humano
 
-<details>
-<summary>📄</summary>
+```
+Máquina ●────────────────────────────── Humano
+        1  2  3  4  5  6  7  8  9  10
+```
+Hoje, o CareBot fica em 1 de 10, no padrão “robject” (objeto funcional que se move) com tendência minimalista.
 
-O Rumo fica próximo do polo **minimalista** do espectro, com leve antropomorfismo (olhos, "cabeça" que gira), sem rosto detalhado nem fala emocional complexa — parecido com o Keepon citado na aula de Design. Justificativa: um design fortemente humano geraria expectativa de conversa fluida, que o robô não tem; pouco antropomorfismo, por outro lado, dificultaria que visitantes se sintam à vontade para abordá-lo. Por ficar longe do polo humano, o risco de vale da estranheza é baixo.
+- Nada na forma lembra um corpo. Não há cabeça, olhos, rosto ou braços. A geometria é de prateleiras sobre rodas.
+- A forma segue a função. Cada elemento tem um propósito técnico (chapas para carga, rodas para locomoção, LiDAR para percepção). Nenhum existe para parecer humano ou animal.
+- Não é zoomórfico. Também não evoca um animal de estimação.
+- O comportamento é a única fonte de “vida”. O robô se move sozinho, escolhe caminhos e para diante de obstáculos. Isso faz as pessoas atribuírem intenções a ele, mesmo sem rosto, como acontece com aspiradores robô. Esse efeito vem do movimento, e não do design.
+<br>
 
-</details>
+##### 2. Qual padrão é mais aceito pela sociedade no contexto desse projeto?
+
+O padrão mais aceito é o de máquina ou minimalista, complementado por poucos sinais sociais abstratos. Essa conclusão vem do próprio mercado: os robôs de logística hospitalar analisados têm formato de gabinete ou carrinho, sem traços humanos. O Zena RX, por exemplo, é essencialmente um gabinete com compartimentos trancáveis.
+
+Há também uma questão de expectativas. Um robô com aparência humana sugere que ele conversa, compreende e participa do cuidado direto, mas o CareBot apenas transporta itens entre pontos definidos. Manter um design de máquina evita a frustração de uma promessa que o robô não cumpre, em linha com a ideia de prometer menos e entregar mais. O ambiente hospitalar reforça essa escolha, já que pacientes fragilizados e crianças tendem a reagir pior a algo ambíguo ou “quase humano” do que a algo claramente identificável como máquina.
+<br>
+
+##### 3. Como evitar o vale da estranheza
+
+O vale da estranheza, conceito proposto por Masahiro Mori em 1970, descreve o desconforto causado por robôs que são quase humanos, mas apresentam falhas sutis que os tornam inquietantes. Como o CareBot está em 1 numa escala de 10 de antropomorfismo, o risco hoje é muito baixo. A estratégia do grupo, portanto, é não entrar nessa região, mantendo coerência entre aparência e comportamento.
+<br>
 
 ### Padrões de design
 
@@ -212,20 +239,100 @@ Um risco ético é que o robô provoque acidentes ou bloqueie a passagem em áre
 
 ## Ações do robô
 
-> 💡
-> Para cada ação:
-> - Descreva a ação.
-> - Determine os pré-requisitos para que a ação aconteça
-> - Determine o que se espera que seja modificado no ambiente quando a ação é finalizada
+Para cumprir sua rotina de entregas entre os andares do hospital, o CareBot realiza quatro ações principais de forma coordenada:
 
-<details>
-<summary>📄</summary>
 
-**Guiar até o destino** — pré-requisito: destino escolhido no menu e caminho livre conhecido no mapa do dia. Ao finalizar: o visitante está fisicamente no laboratório e o robô retorna à posição de espera no saguão.
+#### 1. Deslocamento pelos corredores (Navegação horizontal)
 
-**Dar informação rápida** — pré-requisito: pergunta reconhecida dentro do conjunto de perguntas frequentes cadastradas. Ao finalizar: a resposta foi falada e também exibida na tela.
+- **Descrição da ação:** 
+  - O CareBot se desloca de forma autônoma pelos corredores hospitalares utilizando o sistema de navegação Nav2 no ROS 2 Jazzy Jalisco
+  - A locomoção é feita por duas rodas motorizadas na parte de trás e duas rodas de apoio na frente, garantindo um andar mais firme e sem os escorregões que aconteciam antes
+  - O robô anda sempre pelo lado direito do corredor e em velocidade moderada, aproveitando seu tamanho compacto para não atrapalhar a passagem
+  - Respeita o espaço pessoal das pessoas (mantendo entre 0,5 m e 1,2 m de distância), desacelera quando encontra alguém caminhando devagar e contorna colegas conversando sem passar no meio deles.
+  - Usa seu sensor LiDAR para enxergar o caminho, reconhecer onde está e desviar de pessoas e carrinhos em tempo real
 
-</details>
+- **Pré-requisitos:** 
+  - Destino e prioridade definidos pela enfermagem na tela do posto ou no tablet.
+  - Mapa do andar carregado no sistema do robô
+  - Robô ciente de sua localização exata no corredor.
+  - Bateria com carga suficiente para fazer a entrega e retornar.
+  - Materiais colocados nas prateleiras e envio confirmado pelo profissional.
+  - Nenhuma trava ou botão de segurança acionado.
+
+- **Modificações esperadas no ambiente:** 
+  - Deslocamento físico do robô e dos materiais até a área de entrega.
+  - Posto de origem desocupado, permitindo o fluxo livre da equipe.
+  - Convivência harmoniosa nos corredores, com pedestres notando sua presença sem sustos.
+  - Atualização do status da tarefa para a equipe acompanhar o trajeto.
+
+
+#### 2. Uso do elevador entre os andares (Navegação vertical)
+
+- **Descrição da ação:** 
+  - Ao chegar ao saguão, o robô espera ao lado da porta do elevador (nunca bem na frente) para não impedir a saída de quem está lá dentro.
+  - Chama o elevador de forma automática pelo sistema do hospital ou por acionamento planejado.
+  - Quando a porta abre, o robô verifica o espaço interno; se avistar macas, cadeiras de rodas ou a cabine cheia, ele cede a vez com gentileza, acende suas luzes em tom âmbar e fala: *"Pode ir, eu aguardo o próximo."*
+  - Com espaço livre, pede licença (*"Com licença"*) e entra em linha reta.
+  - O novo par de rodas traseiras ajuda a vencer o pequeno desnível e o vão do elevador com firmeza e suavidade.
+  - Dentro da cabine, posiciona-se no fundo ou na lateral, virado de frente para a porta, em silêncio e com a tela informando o andar para onde está indo.
+  - Ao chegar ao andar certo, espera as pessoas saírem primeiro, avisa (*"Com licença, este é meu andar"*) e sai com cuidado.
+
+- **Pré-requisitos:** 
+  - Rota que exija troca de andar para completar a entregas.
+  - Porta do elevador completamente aberta.
+  - Espaço interno suficiente e sem passageiros prioritários (macas ou cadeirantes).
+  - Robô alinhado de frente para a soleira para passar sem prender as rodas.
+  - Reconhecimento do elevador e do andar ativo via câmera ou comunicação integrada.
+
+- **Modificações esperadas no ambiente:** 
+  - Robô e materiais transportados de forma segura até o outro andar.
+  - Carregamento automático do mapa do novo pavimento no sistema de navegação.
+  - Espaço do elevador compartilhado com tranquilidade, sem assustar os passageiros.
+  - Cabine livre e desocupada assim que a descida/subida é concluída.
+
+
+#### 3. Entrega de materiais no destino (Interação de entrega)
+
+- **Descrição da ação:** 
+  - O robô chega à sala de destino (como laboratório ou farmácia) e vai desacelerando aos poucos.
+  - Faz uma aproximação pela frente do profissional de saúde, parando a uma distância confortável de conversa ($\approx 1{,}2\text{ m}$).
+  - Gira o corpo para posicionar as prateleiras e a tela de toque de frente para a pessoa, facilitando o alcance.
+  - Mostra na tela o resumo da entrega e pede que retirem os itens com calma.
+  - Assim que a retirada é confirmada com um toque na tela, agradece cordialmente: *"Entrega concluída. Obrigado!"*.
+  - Fica pronto para voltar à sua base ou seguir para uma próxima chamada.
+
+- **Pré-requisitos:** 
+  - Chegada ao ponto correto de entrega sem desvios de posição.
+  - Presença de um funcionário autorizado no local para receber os itens.
+  - Motores completamente parados e travados para dar firmeza enquanto a pessoa mexe nas prateleiras.
+  - Espaço livre em volta do robô para facilitar o acesso do profissional.
+
+- **Modificações esperadas no ambiente:** 
+  - Retirada das amostras ou remédios das prateleiras do robô para as mãos da equipe.
+  - Entrega marcada como finalizada no sistema do hospital.
+  - Robô pronto para descansar na base ou atender ao próximo chamado da enfermagem.
+  - Espaço de trabalho do laboratório ou farmácia liberado logo após a entrega.
+
+
+#### 4. Parada de segurança e pedido de passagem
+
+- **Descrição da ação:** 
+  - Ao notar uma parada repentina de alguém à frente, a chegada de uma maca de emergência ou o corredor bloqueado por carrinhos, o robô para suavemente na mesma hora.
+  - Aguarda alguns instantes em silêncio para ver se a pessoa ou obstáculo vai se mover.
+  - Acende luzes de alerta para sinalizar que está aguardando vez.
+  - Se continuar bloqueado, pede licença com voz calma e amigável: *"Com licença, posso passar?"*.
+  - Se o bloqueio continuar após o aviso, busca sozinho um caminho alternativo para contornar a área.
+
+- **Pré-requisitos:** 
+  - Sensor LiDAR detectando algo ou alguém muito próximo da frente do robô (menos de 0,5 m).
+  - Caminho habitual temporariamente bloqueado.
+  - Identificação de obstáculos no piso que possam atrapalhar a passagem segura das rodas.
+
+- **Modificações esperadas no ambiente:** 
+  - Segurança total para pedestres e pacientes, prevenindo qualquer esbarrão ou susto.
+  - Reação natural e compreensiva das pessoas ao redor, liberando passagem de forma voluntária ao ouvir o robô pedir licença.
+  - Caminho recalculado pelo robô para contornar o obstáculo sem travar o trânsito do hospital.
+  - Proteção e cuidado com a integridade dos remédios e frascos transportados.
 
 ## Interações do robô
 
