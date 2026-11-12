@@ -204,15 +204,26 @@ O vale da estranheza, conceito proposto por Masahiro Mori em 1970, descreve o de
 
 ### Padrões de design
 
-> 💡
-> Identifique **2 padrões de design** (design patterns) aplicáveis ao seu projeto e explique como eles se **combinam**.
+Os padrões de design em Interação Humano-Robô descrevem soluções recorrentes para problemas de interação social, de forma semelhante aos padrões usados na arquitetura e no desenvolvimento de software. Dentre eles, dois se aplicam diretamente ao CareBot: a **apresentação inicial** e a **recuperação de erros**.
 
-<details>
-<summary>📄</summary>
+#### 1. Apresentação inicial
 
-**"Apresentação inicial"** (o robô se apresenta brevemente antes de perguntar o destino) + **"em movimento junto"** (anda ao lado/à frente do grupo, ajustando o ritmo ao visitante mais lento) — combinados, formam o padrão composto de "robô guia turístico".
+O padrão de apresentação inicial descreve o momento em que o robô se apresenta e deixa claro quem é e o que faz antes de iniciar a interação propriamente dita. No CareBot, esse padrão é importante já que, como discutido anteriormente, a persona Amanda tem pouca familiaridade com tecnologia, e o robô circula entre pacientes, acompanhantes e funcionários que nunca o viram.
 
-</details>
+Tomando como base o OmniCare, que já é capaz de "se apresentar" ao usuário com uma sequência demonstrativa de suas funcionalidades, propõe-se que o CareBot se apresente em duas situações. Primeiramente, no primeiro contato com uma nova equipe ou ala, quando o robô exibe na tela, de forma breve, seu nome, sua função (transporte de materiais entre setores) e como solicitar uma entrega. Em seguida, no início de cada tarefa, quando se apresenta de forma resumida, nesse caso, apenas confirmando o destino e a prioridade escolhidos. Dessa forma, o robô estabelece, desde o início, os limites do seu escopo, reduzindo o risco de expectativas que ele não consegue cumprir.
+
+#### 2. Recuperação de erros
+
+O padrão de recuperação de erros descreve como o robô reconhece uma falha ou um imprevisto e se recupera dele de forma socialmente aceitável, sem perder a confiança do usuário. Em um hospital, imprevistos são frequentes: corredores bloqueados, elevadores cheios, macas de emergência e pessoas que param repentinamente à frente do robô.
+
+No CareBot, esse padrão aparece em três momentos já descritos nas ações e interações do robô. Ao encontrar o caminho bloqueado, o robô para, aguarda, pede passagem (*"Com licença, posso passar?"*) e, se necessário, recalcula a rota. Ao encontrar o elevador ocupado por uma maca ou cadeira de rodas, cede a vez (*"Pode ir, eu aguardo o próximo."*). Por fim, ao enfrentar uma falha que não consegue resolver sozinho, sinaliza o erro pelos LEDs e pela tela, informando à equipe o que aconteceu, em vez de simplesmente parar sem explicação.
+
+#### Combinação dos padrões
+
+Os dois padrões se complementam, já que atuam em momentos diferentes da tarefa. A apresentação inicial define o que se pode esperar do robô; já a recuperação de erros mostra como ele se comporta quando algo não sai como previsto. Combinados, formam o padrão composto de um **"robô logístico transparente"**, isto é, um robô que anuncia sua intenção antes de agir e explica sua situação quando é obrigado a mudar de plano.
+
+Essa combinação responde às preocupações das duas personas. Para a Amanda, a apresentação torna o uso possível sem treinamentos longos, e a recuperação de erros evita que ela precise intervir a cada imprevisto. Para o Dr. Roberto, cuja principal dor é o receio de problemas técnicos que interrompam o fluxo hospitalar, um robô que comunica suas falhas e se recupera sozinho demonstra-se de extrema importância para justificar sua adoção. Por isso, a combinação desses padrões pode ser a resposta para que o CareBot seja percebido como previsível e confiável, mesmo em um ambiente tão dinâmico quanto o hospitalar.
+
 
 ### Valores e ética
 
@@ -223,7 +234,7 @@ Um risco ético é que o robô provoque acidentes ou bloqueie a passagem em áre
 ### Protótipo no papel
 
 <p align="center">
-  <img src="images/prototipo_papel.png" alt="Relay_Robot" width="600">
+  <img src="images/prototipo_papel.png" alt="Relay_Robot" width="400">
 </p>
 
 (Corpo afunilado sobre uma base omnidirecional (três rodas onidirecionais, em arranjo triangular); "cabeça" arredondada com dois olhos, uma antena/sensor no topo; tela na parte de cima do torso, com o nome do robô; sem braços — apenas um anel de luz na base para sinalizar status. Altura total ≈1,55 m; diâmetro da base ≈0,90 m.)
