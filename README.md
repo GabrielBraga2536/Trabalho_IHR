@@ -19,9 +19,9 @@ CareBot é um robô móvel autônomo desenvolvido para navegação em ambientes 
 
 A crescente demanda por serviços de saúde, aliada à necessidade de reduzir riscos de contaminação em ambientes hospitalares, impulsiona o desenvolvimento de soluções tecnológicas capazes de contribuir nas rotinas clínicas. Nesse cenário, robôs móveis autônomos mostram-se como ferramentas promissoras para assumir tarefas logísticas repetitivas, como o transporte de medicamentos, materiais e amostras, aliviando os profissionais de saúde para atividades que exigem maior atenção e análise humana.
 
-O CareBot é um robô móvel autônomo desenvolvido para navegação em ambientes hospitalares, capaz de mapear o espaço ao seu redor, localizar-se de forma idependente e planejar rotas seguras até destinos definidos pelo operador. Com sua configuração mecânica diferencial e tamanho compacto, proporcionando maior estabilidade e precisão de movimento em corredores, elevadores e espaços internos.
+O CareBot é um robô móvel autônomo desenvolvido para navegação em ambientes hospitalares, capaz de mapear o espaço ao seu redor, localizar-se de forma independente e planejar rotas seguras até destinos definidos pelo operador. Com sua configuração mecânica diferencial e tamanho compacto, proporcionando maior estabilidade e precisão de movimento em corredores, elevadores e espaços internos.
 
-**Objetivo em uma frase:** atuar como assistente logístico hospitalar, realizando entregas e deslocamente de forma autônoma e segura.
+**Objetivo em uma frase:** atuar como assistente logístico hospitalar, realizando entregas e deslocamento de forma autônoma e segura.
 
 **Experiência desejada:** interação simples, intuitiva e confiável, reduzindo a carga de trabalho da equipe hospitalar e contribuindo para um ambiente mais eficiente e seguro.
 
@@ -31,7 +31,7 @@ O CareBot é um robô móvel autônomo desenvolvido para navegação em ambiente
 #### Stakeholders
 
 - **Primários** — Equipe de enfermagem e técnicos hospitalares, principais beneficiados pela redução de tarefas logísticas repetitivas.
-- **Secundários** — Gestores hospitalares, interessados na redução de custos operacionais e aumento de eficiência; Médicos e profissionais da saúde, beneficiados pela maior disponibilidade da equipe de enfermagem; Pacientes, que teram seus exames ou medicamentos transportados pelo robô.
+- **Secundários** — Gestores hospitalares, interessados na redução de custos operacionais e aumento de eficiência; Médicos e profissionais da saúde, beneficiados pela maior disponibilidade da equipe de enfermagem; Pacientes, que terão seus exames ou medicamentos transportados pelo robô.
 - **Anti-Usuários** — Financiadores e instituições de fomento, interessados no impacto e viabilidade do projeto; Staff interno do hospital, como faxineiros, manutentores e todos os envolvidos no ambiente de  operação do robô.
 
 #### Personas
@@ -43,7 +43,7 @@ O CareBot é um robô móvel autônomo desenvolvido para navegação em ambiente
 
 <p align="center">
   <img src="images/empatia.png" alt="mapa_empatia" width="600">
-</p>
+</p> 
 
 #### Persona - Amanda
 - **Vê:** Um ambiente hospitalar movimentado, com corredores longos e pacientes que precisam de atenção constante. Vê colegas sobrecarregados realizando tarefas administrativas e logísticas que poderiam ser delegadas.
@@ -54,7 +54,7 @@ O CareBot é um robô móvel autônomo desenvolvido para navegação em ambiente
 - **Ganhos:** Mais tempo disponível para o cuidado direto aos pacientes, redução do cansaço físico no turno de trabalho e maior satisfação profissional ao focar em atividades de maior valor.
 
 #### Persona - Dr. Roberto
-- **Vê:** Um hospital com custos operacionais crescentes e equipe constantemente sobrecarregada. Observa profissionais qualificados despendendo tempo em tarefas logísticas que poderiam ser automatizadas.
+- **Vê:** Um hospital com custos operacionais crescentes e equipe constantemente sobrecarregada. Observa profissionais qualificados perdendo tempo em tarefas logísticas que poderiam ser automatizadas.
 - **Ouve:** Pressões da diretoria por redução de custos e melhoria nos indicadores de qualidade. Relatos da equipe de enfermagem sobre sobrecarga de trabalho e desgaste físico.
 - **Diz e faz:** Participa de reuniões estratégicas buscando soluções para otimizar processos internos. Analisa planilhas de custos operacionais e indicadores de desempenho da equipe.
 - **Pensa e sente:** Sente a responsabilidade de modernizar o hospital sem comprometer a segurança dos pacientes e funcionários. Deseja que o hospital seja reconhecido como referência em inovação na área da saúde.
@@ -143,7 +143,7 @@ O FlashBot nasceu como robô de entrega de prédios (hotéis e escritórios), ma
   - O custo tende a ser menor: um revendedor lista o robô a US$ 20.000, com a observação de que preços na América Latina podem variar. 
 
 - *Pontos negativos:*
-  - É um robô generalista.Não dispôe recursos hospitalares como biometria ou rastreio de cadeia de custódia, que o Zena RX e o Relay oferecem.
+  - É um robô generalista.Não dispõe recursos hospitalares como biometria ou rastreio de cadeia de custódia, que o Zena RX e o Relay oferecem.
   - A carga de 30 kg e os compartimentos de bandeja atendem melhor a suprimentos leves do que a materiais clínicos sensíveis.
   - Não contém informações suficiente sobre conformidade com normas sanitárias, o que seria necessário verificar antes de uma aplicação hospitalar real.
 
@@ -390,7 +390,7 @@ A interação verbal do CareBot é restrita a um conjunto fechado de falas assoc
 
 #### Timing
 
-O robô não usa marcadores conversacionais vocais, como "uh-huh", já que eles sugeririam uma capacidade de diálogo que ele não possui. Em seu lugar, ao receber um toque na tela, emite um sinal sonoro curto e altera a cor do LED, confirmando, imediatamente, que a ação foi registrada e evitando um silêncio ambíguo. Além disso, o robô não fala enquanto detecta alguém falando por perto, aguardando uma pausa antes de pedir licença, e nunca repete o mesmo pedido em sequência, o que soaria insistente.
+O robô não usa marcadores conversacionais vocais, como "uh-huh", já que eles iriam sugerir uma capacidade de diálogo que ele não possui. Em seu lugar, ao receber um toque na tela, emite um sinal sonoro curto e altera a cor do LED, confirmando, imediatamente, que a ação foi registrada e evitando um silêncio ambíguo. Além disso, o robô não fala enquanto detecta alguém falando por perto, aguardando uma pausa antes de pedir licença, e nunca repete o mesmo pedido em sequência, o que soaria insistente.
 
 ### Não-verbal
 
