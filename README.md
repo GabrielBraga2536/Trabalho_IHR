@@ -237,7 +237,7 @@ Um risco ético é que o robô provoque acidentes ou bloqueie a passagem em áre
   <img src="images/prototipo_papel.png" alt="Relay_Robot" width="400">
 </p>
 
-(Corpo afunilado sobre uma base omnidirecional (três rodas onidirecionais, em arranjo triangular); "cabeça" arredondada com dois olhos, uma antena/sensor no topo; tela na parte de cima do torso, com o nome do robô; sem braços — apenas um anel de luz na base para sinalizar status. Altura total ≈1,55 m; diâmetro da base ≈0,90 m.)
+O protótipo apresenta um corpo retangular e compacto, pensado para facilitar sua circulação pelos corredores do hospital. Na parte superior frontal, foi representada uma tela inclinada que exibe informações sobre a navegação e as tarefas. Em uma das laterais, há um compartimento para acomodar os materiais transportados, enquanto as duas faixas luminosas percorrem a estrutura e servem como sinalização visual durante seu funcionamento. Já na parte inferior, estão as rodas responsáveis pela movimentação diferencial. A proposta é manter uma estrutura simples e funcional, na qual cada elemento contribui para a navegação ou para a realização das entregas.
 
 ## Ações do robô
 
